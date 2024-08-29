@@ -37,12 +37,15 @@ public class MatchDay {
             if (diffFirst < diffSecond) {
                 score.put(firstTeam, score.get(firstTeam) + 2);
                 score.put(secondTeam, score.get(secondTeam));
+                System.out.println(firstTeam + " won the match");
             } else if (diffSecond < diffFirst) {
                 score.put(secondTeam, score.get(secondTeam) + 2);
                 score.put(firstTeam, score.get(firstTeam));
+                System.out.println(secondTeam + " won the match");
             } else {
                 score.put(firstTeam, score.get(firstTeam) + 1);
                 score.put(secondTeam,score.get(secondTeam) + 1);
+                System.out.println("Both teams won 1 point");
             }
             System.out.println("Correct value is:" + value);
         }

@@ -60,13 +60,35 @@ public class Main {
         }
         Stack<Pair<String,String>> st = new Stack<>();
         matchSchedule(queue,st);
+        System.out.println("Match Scheduled");
         HashMap<String,Integer> score = new HashMap<>();
-        if(!st.isEmpty()) {
+        while(!st.isEmpty()) {
+            System.out.println("Team " + st.peek());
             MatchDay.matchDay(st.pop(),score);
         }
         System.out.println("Final Scores:");
         for (Map.Entry<String, Integer> entry : score.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
+        String firstTeam = "";
+        String secondTeam = "";
+        int firstMax = 0;
+        int secondMax = 0;
+        for (Map.Entry<String, Integer> entry : score.entrySet()) {
+            int currentScore = entry.getValue();
+            String currentTeam = entry.getKey();
+            if (currentScore > firstMax) {
+                secondMax = firstMax;
+                secondTeam = firstTeam;
+                firstMax = currentScore;
+                firstTeam = currentTeam;
+            } else if(currentScore > secondMax) {
+                secondMax = currentScore;
+                secondTeam = currentTeam;
+            }
+        }
+        System.out.println("Top two teams " + firstTeam + " " + secondTeam);
+        Pair<String,String> topTeams = new Pair<>(firstTeam,secondTeam);
+        MatchDay.matchDay(topTeams,score);
     }
 }
